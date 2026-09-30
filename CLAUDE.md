@@ -4,7 +4,8 @@ Static one-page portfolio for Anas Al-Sharkawy, Senior Graphic Designer & 2D Ani
 Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.html` to preview.
 
 ## Structure
-- `index.html` — page markup: nav, hero, about, services, work, experience, skills, contact, footer.
+- `index.html` — page markup: nav, hero, about, work, services, experience, skills, contact, footer.
+  `<head>` has Open Graph/Twitter tags pointing at the live URL; `assets/og-image.jpg` (1200×630) is the share image.
 - `css/style.css` — all styles. Color tokens are on `:root` at the top (light theme) and
   redefined for dark theme under `prefers-color-scheme: dark` and `:root[data-theme="dark"]`.
 - `js/content.js` — ALL editable data: `PROJECTS`, `CATS_AR`, `JOBS`, `TOOLS`, `LANGS`, and `AR` (Arabic page text).
@@ -59,5 +60,4 @@ GitHub Pages, or Vercel. `netlify.toml` publishes the repo root.
 
 ## Good next tasks
 - Fill in `JOBS[].what` lines with Anas's real responsibilities.
-- Add Open Graph tags + a share image.
 - Optional: per-project case study pages (`work/<slug>.html`) reusing css/style.css.

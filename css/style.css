@@ -138,7 +138,7 @@ section.block{padding:110px 0}
 .card h3{font-size:24px}
 .card .cat{font-size:14px;color:var(--muted);font-weight:600;white-space:nowrap}
 .card:hover h3{text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:4px;text-underline-offset:4px}
-.more{margin-top:24px}
+.more{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px}
 
 /* Project viewer */
 .viewer{width:min(1200px,100% - 24px);max-width:none;height:min(92vh,100% - 24px);max-height:none;padding:0;border:0;border-radius:26px;background:var(--bg);color:var(--ink);overflow:hidden}

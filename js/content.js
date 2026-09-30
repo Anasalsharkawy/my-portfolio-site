@@ -156,6 +156,7 @@ const AR = {
   "work.next": "المشروع التالي",
   "work.close": "إغلاق",
   "work.more": "شاهد كل المشاريع على Behance",
+  "work.drive": "البورتفوليو كامل على Google Drive",
   "work.placeholder": "أضف صورة مصغرة أو فيديو",
 
   "exp.title": "أين عملت",

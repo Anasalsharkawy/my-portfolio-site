@@ -67,6 +67,11 @@ filters.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   activeCat = b.dataset.cat;
   applyFilter();
+  if (fancy) grid.querySelectorAll(".card:not([hidden])").forEach((card, i) => {
+    card.classList.remove("pop"); void card.offsetWidth;
+    card.style.animationDelay = i * .06 + "s";
+    card.classList.add("pop", "in");
+  });
 });
 
 /* ============ Experience & skills ============ */
@@ -87,6 +92,111 @@ const bars = list => list.map(([n,v,nAr]) => {
 function renderSkills(){
   document.getElementById("tools").innerHTML = bars(TOOLS);
   document.getElementById("langs").innerHTML = bars(LANGS);
+}
+
+/* ============ Motion ============ */
+const fancy = !reduce;
+const io = fancy && "IntersectionObserver" in window
+  ? new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }), { rootMargin: "0px 0px -8% 0px", threshold: .12 })
+  : null;
+let firstRender = true;
+
+/* Hide elements until they scroll into view, staggered by `step` seconds.
+   After the first render (e.g. a language switch) new elements just appear. */
+function reveal(els, cls = "", step = .08){
+  if (!io) return;
+  [...els].forEach((el, i) => {
+    if (el.classList.contains("rv")) return;
+    el.classList.add("rv", ...cls.split(" ").filter(Boolean));
+    if (firstRender) { el.style.setProperty("--d", Math.min(i, 6) * step + "s"); io.observe(el); }
+    else el.classList.add("in");
+  });
+}
+
+function revealRendered(){
+  reveal(grid.querySelectorAll(".card"));
+  reveal(document.querySelectorAll(".timeline li"), "rv-side", .06);
+  document.querySelectorAll(".bars").forEach(ul =>
+    ul.querySelectorAll(".fill").forEach((f, i) => f.style.transitionDelay = .2 + i * .1 + "s"));
+}
+
+if (io) {
+  reveal(document.querySelectorAll("section.block h2, .skills-wrap h3"), "rv-pop");
+  reveal(document.querySelectorAll(".head .lede, .about .big, .filters, .more"));
+  reveal(document.querySelectorAll(".facts li"), "", .06);
+  reveal(document.querySelectorAll(".svc"), "", .1);
+  reveal(document.querySelectorAll(".bars"), "rv-bars");
+  reveal(document.querySelectorAll(".cta"), "rv-pop");
+  reveal(document.querySelectorAll(".links a"), "", .1);
+}
+
+/* Scroll progress line */
+const progress = document.createElement("div");
+progress.className = "progress";
+document.body.prepend(progress);
+const updateProgress = () => {
+  const h = root.scrollHeight - innerHeight;
+  progress.style.setProperty("--p", h > 0 ? scrollY / h : 0);
+};
+addEventListener("scroll", updateProgress, { passive: true });
+addEventListener("resize", updateProgress);
+
+/* Project cards tilt toward the pointer */
+if (fancy && matchMedia("(hover: hover)").matches) {
+  grid.addEventListener("pointermove", e => {
+    const m = e.target.closest(".card")?.querySelector(".media"); if (!m) return;
+    const r = m.getBoundingClientRect();
+    m.style.setProperty("--ry", ((e.clientX - r.left) / r.width - .5) * 10 + "deg");
+    m.style.setProperty("--rx", (.5 - (e.clientY - r.top) / r.height) * 8 + "deg");
+  });
+  grid.addEventListener("pointerout", e => {
+    const card = e.target.closest(".card");
+    if (!card || card.contains(e.relatedTarget)) return;
+    const m = card.querySelector(".media");
+    m.style.removeProperty("--rx"); m.style.removeProperty("--ry");
+  });
+}
+
+/* Pen cursor with a trailing ring (mouse/trackpad only) */
+if (fancy && matchMedia("(pointer: fine)").matches) {
+  root.classList.add("has-cursor");
+  const ring = document.createElement("div");
+  ring.className = "cursor";
+  ring.setAttribute("aria-hidden", "true");
+  document.body.append(ring);
+  let x = 0, y = 0, cx = 0, cy = 0, running = false;
+  const follow = () => {
+    cx += (x - cx) * .2; cy += (y - cy) * .2;
+    ring.style.transform = `translate(${cx}px,${cy}px)`;
+    running = Math.abs(x - cx) + Math.abs(y - cy) > .3;
+    if (running) requestAnimationFrame(follow);
+  };
+  addEventListener("pointermove", e => {
+    if (e.pointerType !== "mouse") return;
+    x = e.clientX; y = e.clientY;
+    if (!ring.classList.contains("on")) { cx = x; cy = y; ring.classList.add("on"); }
+    ring.classList.toggle("hover", !!e.target.closest("a, button"));
+    if (!running) { running = true; requestAnimationFrame(follow); }
+  }, { passive: true });
+  root.addEventListener("mouseleave", () => ring.classList.remove("on"));
+}
+
+/* Run a page update as a View Transition when the browser supports it. */
+function transition(update, circleFrom){
+  if (!fancy || !document.startViewTransition) return update();
+  if (circleFrom) root.classList.add("vt-circle");
+  const vt = document.startViewTransition(update);
+  if (circleFrom) {
+    const r = circleFrom.getBoundingClientRect();
+    const x = r.left + r.width / 2, y = r.top + r.height / 2;
+    const end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    vt.ready.then(() => root.animate(
+      { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${end}px at ${x}px ${y}px)`] },
+      { duration: 650, easing: "cubic-bezier(.6,0,.2,1)", pseudoElement: "::view-transition-new(root)" }));
+    vt.finished.finally(() => root.classList.remove("vt-circle"));
+  }
 }
 
 /* ============ Toggles ============ */
@@ -113,22 +223,25 @@ function setLang(next){
   renderProjects();
   renderTimeline();
   renderSkills();
+  revealRendered();
   updateThemeBtn();
 }
 
 langBtn.addEventListener("click", () => {
-  setLang(lang === "ar" ? "en" : "ar");
-  store.set("lang", lang);
+  const next = lang === "ar" ? "en" : "ar";
+  transition(() => setLang(next));
+  store.set("lang", next);
 });
 
 themeBtn.addEventListener("click", () => {
   const next = isDark() ? "light" : "dark";
-  root.dataset.theme = next;
+  transition(() => { root.dataset.theme = next; updateThemeBtn(); }, themeBtn);
   store.set("theme", next);
-  updateThemeBtn();
 });
 /* Follow the system setting until the visitor picks a theme themselves. */
 systemDark.addEventListener("change", () => { if (!root.dataset.theme) updateThemeBtn(); });
 
 setLang(lang);
+firstRender = false;
+updateProgress();
 document.getElementById("yr").textContent = new Date().getFullYear();

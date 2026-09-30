@@ -62,7 +62,8 @@ p{margin:0}
 .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;align-items:end;gap:20px}
 .hero-copy{padding-bottom:64px}
 .hero h1{font-size:clamp(64px,11vw,148px);line-height:.88}
-.hero .hl{background:linear-gradient(transparent 58%,var(--yellow) 58%,var(--yellow) 92%,transparent 92%);padding:0 .06em;color:inherit}
+.hero .hl{background:linear-gradient(var(--yellow),var(--yellow)) no-repeat 0 88%/100% 34%;padding:0 .06em;color:inherit}
+[dir="rtl"] .hero .hl{background-position:100% 88%}
 .hero p.lede{margin:28px 0 32px;font-size:19px}
 .hero .actions{display:flex;flex-wrap:wrap;gap:12px}
 .stage{position:relative;padding-top:150px}
@@ -168,3 +169,83 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 :lang(ar) .timeline h3{font-size:26px}
 :lang(ar) .card h3{font-size:22px}
 :lang(ar) .bubble strong{font-size:26px}
+
+/* ============ Motion ============
+   Everything below is off for visitors who prefer reduced motion.
+   Scroll reveals (.rv) and the cursor are added by main.js, so the page is complete without JS. */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--yellow);transform:scaleX(var(--p,0));transform-origin:left;z-index:30;pointer-events:none}
+[dir="rtl"] .progress{transform-origin:right}
+
+@media (prefers-reduced-motion:no-preference){
+  /* Hero: headline rises, the highlight is drawn like a marker stroke, the portrait floats. */
+  .hero h1,.hero .lede,.hero .actions{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+  .hero .lede{animation-delay:.15s}
+  .hero .actions{animation-delay:.3s}
+  .hero .hl{animation:draw .8s cubic-bezier(.7,0,.2,1) .75s both}
+  .stage img{animation:rise 1s cubic-bezier(.2,.8,.2,1) .1s both,float 6s ease-in-out 1.4s infinite}
+  @keyframes rise{from{opacity:0;transform:translateY(28px)}}
+  @keyframes draw{from{background-size:0% 34%}}
+  @keyframes float{50%{transform:translateY(-8px) rotate(-.4deg)}}
+
+  /* Scroll reveals */
+  .rv{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.8,.2,1) var(--d,0s),transform .8s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
+  .rv-pop{transform:scale(.85) translateY(16px);transform-origin:left bottom;transition-timing-function:ease,cubic-bezier(.2,.9,.25,1.3)}
+  [dir="rtl"] .rv-pop{transform-origin:right bottom}
+  .cta.rv-pop{transform-origin:12% 110%}
+  [dir="rtl"] .cta.rv-pop{transform-origin:88% 110%}
+  .rv-side{transform:translateX(-44px)}
+  [dir="rtl"] .rv-side{transform:translateX(44px)}
+  .rv.in,[dir] .rv.in{opacity:1;transform:none}
+  .rv-bars .fill{transform:scaleX(0);transform-origin:left;transition:transform 1.3s cubic-bezier(.2,.8,.2,1)}
+  [dir="rtl"] .rv-bars .fill{transform-origin:right}
+  .rv-bars.in .fill{transform:none}
+
+  /* Buttons lift, and the yellow ones get a light sweep */
+  .btn{position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.2,.9,.25,1.3),filter .2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:scale(.96)}
+  .btn:not(.ghost)::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.6) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s;pointer-events:none}
+  .btn:not(.ghost):hover::after{transform:translateX(120%)}
+  .toggle{transition:border-color .2s,transform .3s cubic-bezier(.2,.9,.25,1.3)}
+  .toggle:hover{transform:translateY(-2px)}
+  .toggle.icon:hover svg{transform:rotate(-20deg)}
+  .toggle svg{transition:transform .4s cubic-bezier(.2,.9,.25,1.3)}
+
+  /* Nav links: a marker underline slides in */
+  .nav ul a{padding-bottom:3px;background:linear-gradient(var(--yellow),var(--yellow)) no-repeat 0 100%/0 3px;transition:background-size .35s cubic-bezier(.2,.8,.2,1),color .2s}
+  [dir="rtl"] .nav ul a{background-position:100% 100%}
+  .nav ul a:hover{background-size:100% 3px}
+
+  /* Small hover touches */
+  .facts li,.filters button{transition:background .25s,color .25s,border-color .25s,transform .3s cubic-bezier(.2,.9,.25,1.3)}
+  .facts li:hover{background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow);transform:rotate(-2deg)}
+  .filters button:hover{transform:translateY(-2px)}
+  .tools span{transition:transform .3s cubic-bezier(.2,.9,.25,1.3)}
+  .tools span:hover{transform:rotate(-4deg) scale(1.08)}
+  .timeline li{transition:padding .35s cubic-bezier(.2,.8,.2,1)}
+  .timeline li:hover{padding-inline-start:14px}
+  .links a{transition:background .25s,color .25s,border-color .25s,transform .3s cubic-bezier(.2,.9,.25,1.3)}
+  .links a:hover{transform:translateY(-4px)}
+
+  /* Project filter: cards pop back in */
+  .card.pop{animation:cardIn .5s cubic-bezier(.2,.9,.25,1.2) both}
+  @keyframes cardIn{from{opacity:0;transform:scale(.9)}}
+
+  /* Theme switch: the new theme grows in a circle from the button (see main.js) */
+  .vt-circle::view-transition-old(root),.vt-circle::view-transition-new(root){animation:none;mix-blend-mode:normal}
+}
+
+/* Project cards tilt toward the pointer (the angle comes from main.js) */
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .card .media{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+  .card:hover .media{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-6px);box-shadow:0 26px 50px -26px rgba(0,0,0,.5)}
+  .media img,.media video,.ph svg{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+  .card:hover .media img,.card:hover .media video{transform:scale(1.05)}
+  .card:hover .ph svg{transform:scale(1.12) rotate(-6deg)}
+}
+
+/* Pen cursor with a trailing yellow ring (mouse only; added by main.js) */
+.has-cursor body{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 28l3-9L22 4l6 6-15 15z' fill='%23F8DE3F' stroke='%231D2329' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M7 19l6 6' stroke='%231D2329' stroke-width='2'/%3E%3Cpath d='M4 28l1.5-4.5 3 3z' fill='%231D2329'/%3E%3C/svg%3E") 4 28,auto}
+.cursor{position:fixed;top:0;left:0;width:36px;height:36px;margin:-18px 0 0 -18px;border:2px solid var(--yellow);border-radius:50%;pointer-events:none;z-index:40;opacity:0;transition:width .25s,height .25s,margin .25s,background .25s,opacity .25s}
+.cursor.on{opacity:1}
+.cursor.hover{width:64px;height:64px;margin:-32px 0 0 -32px;background:color-mix(in srgb,var(--yellow) 22%,transparent)}

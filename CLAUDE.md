@@ -35,7 +35,11 @@ Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.htm
 - Identity comes from Anas's CV: yellow highlight `#F8DE3F`, speech-bubble grey `#D8E1E2`, ink `#1D2329`.
 - Font: Archivo (Google Fonts), condensed width (`"wdth" 62`) + heavy weight for headings, normal width for body.
 - The speech bubble is the recurring motif (logo, hero, contact). Keep it.
-- Only one intro animation (the hero bubble pop). Don't add scroll-reveal or hover effects on every element.
+- Motion (all in the "Motion" sections of style.css and main.js, all off under `prefers-reduced-motion`):
+  hero rise + marker-drawn highlight + bubble pop + floating portrait, scroll reveals (`.rv`, `.rv-pop` speech-bubble pop,
+  `.rv-side`, `.rv-bars` skill bars), card tilt on hover, pen cursor with trailing ring (mouse only),
+  scroll progress line, and View Transitions for theme (circle from the button) and language (crossfade).
+  New sections: reuse the `reveal()` helper in main.js instead of writing new animation code.
 - Avoid ALL-CAPS labels, numbered section eyebrows, and generic card grids.
 - Keep it responsive down to ~360px, keep visible keyboard focus, respect `prefers-reduced-motion`.
 

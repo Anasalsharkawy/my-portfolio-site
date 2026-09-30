@@ -7,8 +7,9 @@ Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.htm
 - `index.html` — page markup: nav, hero, about, services, work, experience, skills, contact, footer.
 - `css/style.css` — all styles. Color tokens are on `:root` at the top (light theme) and
   redefined for dark theme under `prefers-color-scheme: dark` and `:root[data-theme="dark"]`.
-- `js/content.js` — ALL editable data: `PROJECTS`, `JOBS`, `TOOLS`, `LANGS`.
-- `js/main.js` — renders content.js into the page (project grid + filters, timeline, skill bars).
+- `js/content.js` — ALL editable data: `PROJECTS`, `CATS_AR`, `JOBS`, `TOOLS`, `LANGS`, and `AR` (Arabic page text).
+- `js/main.js` — renders content.js into the page (project grid + filters, timeline, skill bars),
+  and runs the language (English/Arabic) and light/dark toggles in the nav.
 - `assets/anas-desk.webp` — Anas's illustrated self-portrait (from his CV). Transparent background.
 - `work/` — put project thumbnails (.jpg/.webp) and short looping videos (.mp4) here.
 
@@ -20,6 +21,15 @@ Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.htm
 - Never invent clients, numbers, testimonials, or achievements. Only use facts Anas provides.
   Placeholder text currently reads "Add one line on your role" — replace it only with real info.
 - Testimonials, client logos, and a blog were intentionally left out until real content exists.
+
+## Languages (English + Arabic)
+- English is the text in `index.html`. Every translatable element has `data-i18n="key"`
+  (plus `data-i18n-alt` / `data-i18n-label` for alt text and aria-labels). Its Arabic is `AR[key]` in content.js.
+- When you add or change page text, update both: the English in index.html and the matching `AR` entry.
+- Projects use `title_ar`, categories use `CATS_AR`, jobs use `what_ar` (optional `name_ar`), `LANGS` entries are `[name, value, arabicName]`.
+- Arabic switches the page to `dir="rtl"` and the Cairo font. Use logical CSS properties
+  (`margin-inline-start`, `inset-inline-start`, `padding-inline`…) instead of left/right so both directions work.
+- The chosen language and theme are saved in localStorage and applied by the inline script in `<head>`.
 
 ## Design rules
 - Identity comes from Anas's CV: yellow highlight `#F8DE3F`, speech-bubble grey `#D8E1E2`, ink `#1D2329`.

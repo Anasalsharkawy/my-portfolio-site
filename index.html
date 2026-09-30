@@ -1,27 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Anas Al-Sharkawy · Graphic Designer & 2D Animator</title>
+<title data-i18n="meta.title">Anas Al-Sharkawy · Graphic Designer & 2D Animator</title>
 <meta name="description" content="Senior graphic designer and 2D animator in Cairo. Motion graphics, brand identity, social media design and e-learning visuals.">
+<script>
+  /* Apply saved language/theme before first paint to avoid a flash. */
+  (function(){
+    var d = document.documentElement, th = null, lg = null;
+    try { th = localStorage.getItem("theme"); lg = localStorage.getItem("lang"); } catch(e){}
+    if (th === "dark" || th === "light") d.setAttribute("data-theme", th);
+    if (lg !== "ar" && lg !== "en") lg = /^ar\b/i.test(navigator.language || "") ? "ar" : "en";
+    if (lg === "ar") { d.lang = "ar"; d.dir = "rtl"; }
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Cairo:wght@400..1000&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header class="nav">
   <div class="wrap">
-    <a class="mark" href="#top" aria-label="Anas Al-Sharkawy, back to top">Anas</a>
+    <a class="mark" href="#top" aria-label="Anas Al-Sharkawy, back to top" data-i18n-label="nav.mark" data-i18n="nav.markText">Anas</a>
     <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
+      <li><a href="#work" data-i18n="nav.work">Work</a></li>
+      <li><a href="#services" data-i18n="nav.services">Services</a></li>
+      <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+      <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
     </ul>
-    <a class="btn" href="#contact">Let's talk</a>
+    <div class="ctrls">
+      <button type="button" class="toggle" id="lang-btn" lang="ar">عربي</button>
+      <button type="button" class="toggle icon" id="theme-btn" aria-label="Switch to dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" hidden><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      </button>
+    </div>
+    <a class="btn" href="#contact" data-i18n="nav.talk">Let's talk</a>
   </div>
 </header>
 
@@ -30,19 +47,19 @@
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <h1>I draw it.<br>Then I make it <span class="hl">move.</span></h1>
-        <p class="lede">Senior graphic designer and 2D animator in Cairo. For six years I've turned ideas into characters, brands and motion for e-learning publishers and Saudi marketing agencies.</p>
+        <h1 data-i18n="hero.title">I draw it.<br>Then I make it <span class="hl">move.</span></h1>
+        <p class="lede" data-i18n="hero.lede">Senior graphic designer and 2D animator in Cairo. For six years I've turned ideas into characters, brands and motion for e-learning publishers and Saudi marketing agencies.</p>
         <div class="actions">
-          <a class="btn" href="#work">See my work</a>
-          <a class="btn ghost" href="https://www.behance.net/AnasSkills" target="_blank" rel="noopener">Behance profile</a>
+          <a class="btn" href="#work" data-i18n="hero.seeWork">See my work</a>
+          <a class="btn ghost" href="https://www.behance.net/AnasSkills" target="_blank" rel="noopener" data-i18n="hero.behance">Behance profile</a>
         </div>
       </div>
       <div class="stage">
-        <div class="bubble" role="note">
+        <div class="bubble" role="note" data-i18n="hero.bubble">
           <strong>Hi, I'm Anas Al-Sharkawy.</strong>
           Graphic designer and 2D animator. Tell me the idea and I'll give it a look, a voice and some movement.
         </div>
-        <img src="assets/anas-desk.webp" width="582" height="474" alt="Illustrated self-portrait of Anas drawing on a pen display at his desk">
+        <img src="assets/anas-desk.webp" width="582" height="474" alt="Illustrated self-portrait of Anas drawing on a pen display at his desk" data-i18n-alt="hero.alt">
       </div>
     </div>
   </section>
@@ -50,15 +67,15 @@
   <!-- ABOUT -->
   <section class="block about" aria-labelledby="about-h">
     <div class="wrap">
-      <h2 id="about-h">About me</h2>
+      <h2 id="about-h" data-i18n="about.title">About me</h2>
       <div>
-        <p class="big">I make visual content that has to teach or sell: animated lessons, characters, brand identities and social campaigns. I start from what the client needs people to understand, then design and animate until it's clear and memorable.</p>
+        <p class="big" data-i18n="about.text">I make visual content that has to teach or sell: animated lessons, characters, brand identities and social campaigns. I start from what the client needs people to understand, then design and animate until it's clear and memorable.</p>
         <ul class="facts">
-          <li>6+ years of experience</li>
-          <li>E-learning & marketing</li>
-          <li>UI/UX basics</li>
-          <li>Speaks English, French and Turkish</li>
-          <li>Based in Mohandessin, Cairo</li>
+          <li data-i18n="about.f1">6+ years of experience</li>
+          <li data-i18n="about.f2">E-learning & marketing</li>
+          <li data-i18n="about.f3">UI/UX basics</li>
+          <li data-i18n="about.f4">Speaks English, French and Turkish</li>
+          <li data-i18n="about.f5">Based in Mohandessin, Cairo</li>
         </ul>
       </div>
     </div>
@@ -68,28 +85,28 @@
   <section class="block" id="services" aria-labelledby="svc-h">
     <div class="wrap">
       <div class="head">
-        <h2 id="svc-h">What I can do for you</h2>
-        <p class="lede">Four kinds of work I take on most, from a single social post to a full animated course.</p>
+        <h2 id="svc-h" data-i18n="svc.title">What I can do for you</h2>
+        <p class="lede" data-i18n="svc.lede">Four kinds of work I take on most, from a single social post to a full animated course.</p>
       </div>
       <div class="services">
         <article class="svc">
-          <h3>2D animation & motion graphics</h3>
-          <p>Explainer videos, character animation, animated logos and motion pieces for ads and lessons.</p>
+          <h3 data-i18n="svc.s1.h">2D animation & motion graphics</h3>
+          <p data-i18n="svc.s1.p">Explainer videos, character animation, animated logos and motion pieces for ads and lessons.</p>
           <div class="tools"><span>After Effects</span><span>Premiere</span><span>Illustrator</span></div>
         </article>
         <article class="svc">
-          <h3>Brand identity</h3>
-          <p>Logos, colour and type systems, and brand guidelines that stay consistent across print and screen.</p>
+          <h3 data-i18n="svc.s2.h">Brand identity</h3>
+          <p data-i18n="svc.s2.p">Logos, colour and type systems, and brand guidelines that stay consistent across print and screen.</p>
           <div class="tools"><span>Illustrator</span><span>Photoshop</span><span>InDesign</span></div>
         </article>
         <article class="svc">
-          <h3>Social media design</h3>
-          <p>Campaign visuals, post and story templates, and short motion ads for brands in Egypt and the Gulf.</p>
+          <h3 data-i18n="svc.s3.h">Social media design</h3>
+          <p data-i18n="svc.s3.p">Campaign visuals, post and story templates, and short motion ads for brands in Egypt and the Gulf.</p>
           <div class="tools"><span>Photoshop</span><span>After Effects</span></div>
         </article>
         <article class="svc">
-          <h3>E-learning visuals</h3>
-          <p>Characters, illustrations and animated content for courses and educational publishers.</p>
+          <h3 data-i18n="svc.s4.h">E-learning visuals</h3>
+          <p data-i18n="svc.s4.p">Characters, illustrations and animated content for courses and educational publishers.</p>
           <div class="tools"><span>Illustrator</span><span>After Effects</span><span>Figma</span></div>
         </article>
       </div>
@@ -100,12 +117,12 @@
   <section class="block" id="work" aria-labelledby="work-h" style="padding-top:20px">
     <div class="wrap">
       <div class="head">
-        <h2 id="work-h">Selected work</h2>
-        <p class="lede">A few projects from e-learning, branding and marketing. Full case studies are on Behance.</p>
+        <h2 id="work-h" data-i18n="work.title">Selected work</h2>
+        <p class="lede" data-i18n="work.lede">A few projects from e-learning, branding and marketing. Full case studies are on Behance.</p>
       </div>
-      <div class="filters" role="group" aria-label="Filter projects"></div>
+      <div class="filters" role="group" aria-label="Filter projects" data-i18n-label="work.filter"></div>
       <div class="grid" id="grid"></div>
-      <div class="more"><a class="btn ghost" href="https://www.behance.net/AnasSkills" target="_blank" rel="noopener">See all projects on Behance</a></div>
+      <div class="more"><a class="btn ghost" href="https://www.behance.net/AnasSkills" target="_blank" rel="noopener" data-i18n="work.more">See all projects on Behance</a></div>
     </div>
   </section>
 
@@ -113,8 +130,8 @@
   <section class="block" id="experience" aria-labelledby="exp-h" style="padding-top:20px">
     <div class="wrap">
       <div class="head">
-        <h2 id="exp-h">Where I've worked</h2>
-        <p class="lede">Publishers, academies, a hospital and marketing agencies in Egypt and Saudi Arabia.</p>
+        <h2 id="exp-h" data-i18n="exp.title">Where I've worked</h2>
+        <p class="lede" data-i18n="exp.lede">Publishers, academies, a hospital and marketing agencies in Egypt and Saudi Arabia.</p>
       </div>
       <ol class="timeline" id="timeline"></ol>
     </div>
@@ -124,11 +141,11 @@
   <section class="block" id="skills" aria-labelledby="sk-h" style="padding-top:20px">
     <div class="wrap skills-wrap">
       <div>
-        <h3 id="sk-h">Tools</h3>
+        <h3 id="sk-h" data-i18n="skills.tools">Tools</h3>
         <ul class="bars" id="tools"></ul>
       </div>
       <div>
-        <h3>Languages</h3>
+        <h3 data-i18n="skills.langs">Languages</h3>
         <ul class="bars" id="langs"></ul>
       </div>
     </div>
@@ -138,12 +155,12 @@
   <section class="contact" id="contact" aria-labelledby="ct-h">
     <div class="wrap">
       <div class="cta">
-        <h2 id="ct-h">Got a project?<br>Let's talk.</h2>
-        <p>Send me a short brief: what you need, when you need it, and where it will be used. I usually reply within a day.</p>
+        <h2 id="ct-h" data-i18n="contact.title">Got a project?<br>Let's talk.</h2>
+        <p data-i18n="contact.text">Send me a short brief: what you need, when you need it, and where it will be used. I usually reply within a day.</p>
         <div class="links">
-          <a href="mailto:Anasskillbuild@gmail.com"><small>Email</small><b>Anasskillbuild@gmail.com</b></a>
-          <a href="https://wa.me/201096754569" target="_blank" rel="noopener"><small>WhatsApp / phone</small><b>+20 109 675 4569</b></a>
-          <a href="https://www.behance.net/AnasSkills" target="_blank" rel="noopener"><small>Portfolio</small><b>behance.net/AnasSkills</b></a>
+          <a href="mailto:Anasskillbuild@gmail.com"><small data-i18n="contact.email">Email</small><b dir="ltr">Anasskillbuild@gmail.com</b></a>
+          <a href="https://wa.me/201096754569" target="_blank" rel="noopener"><small data-i18n="contact.phone">WhatsApp / phone</small><b dir="ltr">+20 109 675 4569</b></a>
+          <a href="https://www.behance.net/AnasSkills" target="_blank" rel="noopener"><small data-i18n="contact.portfolio">Portfolio</small><b dir="ltr">behance.net/AnasSkills</b></a>
         </div>
       </div>
     </div>
@@ -152,8 +169,8 @@
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr"></span> Anas Al-Sharkawy</span>
-    <span>Graphic designer and 2D animator in Cairo, Egypt</span>
+    <span>© <span id="yr"></span> <span data-i18n="footer.name">Anas Al-Sharkawy</span></span>
+    <span data-i18n="footer.tagline">Graphic designer and 2D animator in Cairo, Egypt</span>
   </div>
 </footer>
 

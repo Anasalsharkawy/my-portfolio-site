@@ -1,23 +1,90 @@
 /* =====================================================================
    EDIT YOUR CONTENT HERE
    ---------------------------------------------------------------------
-   PROJECTS: add a thumbnail as `image` (jpg/png/webp) or a short looping
-   `video` (mp4). Put the files next to index.html, e.g. "work/logo.mp4".
-   `link` is where the card opens (usually the Behance case study).
-   `wide: true` makes a card twice as wide. Use it for your best piece.
-   `title_ar` is the Arabic title. Category names are translated in CATS_AR.
+   PROJECTS: one entry per piece. Tabs are made from `cat`, in the order
+   they first appear. Each entry has a `type`:
+     "video": `video` (full, with sound, opens in the viewer), `loop` (short
+              muted preview on the card) and `image` (poster).
+     "image": `image` (card thumbnail) and `full` (large version for the viewer).
+     "pdf":   `image` (cover) and `pages` (count). Pages are image files named
+              like the cover plus -p01.webp, -p02.webp …
+   `w`/`h` are the card thumbnail size, so the grid can keep each piece's shape.
+   `title_ar` is the Arabic title. Tab names are translated in CATS_AR.
+   Media lives in work/<category>/. Compress before adding (see CLAUDE.md).
    ===================================================================== */
 const PROJECTS = [
-  { title:"Animated lesson series", title_ar:"سلسلة دروس متحركة", cat:"E-learning", wide:true, video:"", image:"", link:"https://www.behance.net/AnasSkills" },
-  { title:"Brand identity", title_ar:"هوية بصرية", cat:"Branding", video:"", image:"", link:"https://www.behance.net/AnasSkills" },
-  { title:"Social media campaign", title_ar:"حملة سوشيال ميديا", cat:"Social media", video:"", image:"", link:"https://www.behance.net/AnasSkills" },
-  { title:"Character design set", title_ar:"مجموعة تصميم شخصيات", cat:"E-learning", video:"", image:"", link:"https://www.behance.net/AnasSkills" },
-  { title:"App explainer video", title_ar:"فيديو شرح لتطبيق", cat:"Animation", wide:true, video:"", image:"", link:"https://www.behance.net/AnasSkills" },
-  { title:"Logo animation", title_ar:"شعار متحرك", cat:"Animation", video:"", image:"", link:"https://www.behance.net/AnasSkills" }
+  { title:"2D animation", title_ar:"رسوم متحركة 2D", cat:"Motion graphics", type:"video", image:"work/motion/2d-animation.webp", video:"work/motion/2d-animation.mp4", loop:"work/motion/2d-animation-loop.mp4", w:720, h:404 },
+  { title:"Solar energy", title_ar:"الطاقة الشمسية", cat:"Motion graphics", type:"video", image:"work/motion/solar-energy.webp", video:"work/motion/solar-energy.mp4", loop:"work/motion/solar-energy-loop.mp4", w:720, h:404 },
+  { title:"Mohsen & Hanan series intro", title_ar:"انترو حلقات محسن وحنان", cat:"Motion graphics", type:"video", image:"work/motion/mohsen-hanan-intro.webp", video:"work/motion/mohsen-hanan-intro.mp4", loop:"work/motion/mohsen-hanan-intro-loop.mp4", w:720, h:404 },
+  { title:"Ismail's success story", title_ar:"قصة نجاح إسماعيل", cat:"Motion graphics", type:"video", image:"work/motion/ismail-success-story.webp", video:"work/motion/ismail-success-story.mp4", loop:"work/motion/ismail-success-story-loop.mp4", w:720, h:404 },
+  { title:"Collage art · Bedaya", title_ar:"كولاج آرت · بداية", cat:"Motion graphics", type:"video", image:"work/motion/bedaya-collage.webp", video:"work/motion/bedaya-collage.mp4", loop:"work/motion/bedaya-collage-loop.mp4", w:720, h:720 },
+  { title:"Bedaya reel", title_ar:"ريل بداية", cat:"Reels", type:"video", image:"work/reels/bedaya-3.webp", video:"work/reels/bedaya-3.mp4", loop:"work/reels/bedaya-3-loop.mp4", w:720, h:720 },
+  { title:"Men's health · Bedaya", title_ar:"ذكورة · بداية", cat:"Reels", type:"video", image:"work/reels/bedaya-mens-health.webp", video:"work/reels/bedaya-mens-health.mp4", loop:"work/reels/bedaya-mens-health-loop.mp4", w:720, h:720 },
+  { title:"Men's health · Bedaya 2", title_ar:"ذكورة · بداية 2", cat:"Reels", type:"video", image:"work/reels/mens-health-bedaya.webp", video:"work/reels/mens-health-bedaya.mp4", loop:"work/reels/mens-health-bedaya-loop.mp4", w:720, h:720 },
+  { title:"Fakhr Al-Awani · Ramadan", title_ar:"فخر الأواني · رمضان", cat:"Reels", type:"video", image:"work/reels/fakhr-alawani-ramadan.webp", video:"work/reels/fakhr-alawani-ramadan.mp4", loop:"work/reels/fakhr-alawani-ramadan-loop.mp4", w:720, h:720 },
+  { title:"Re7laty landing page", title_ar:"صفحة هبوط رحلتي", cat:"UI/UX", type:"pdf", image:"work/uiux/re7laty-landing.webp", pages:1, w:576, h:720 },
+  { title:"Sumou landing page", title_ar:"صفحة هبوط سمو", cat:"UI/UX", type:"image", image:"work/uiux/sumou-landing.webp", full:"work/uiux/sumou-landing-full.webp", w:720, h:680 },
+  { title:"Kitchen appliances", title_ar:"أجهزة المطبخ", cat:"Website banners", type:"image", image:"work/banners/kitchen-appliances.webp", full:"work/banners/kitchen-appliances-full.webp", w:720, h:404 },
+  { title:"Best sellers", title_ar:"الأفضل مبيعًا", cat:"Website banners", type:"image", image:"work/banners/best-sellers.webp", full:"work/banners/best-sellers-full.webp", w:720, h:404 },
+  { title:"Women's makeup", title_ar:"مكياج حريمي", cat:"Website banners", type:"image", image:"work/banners/womens-makeup.webp", full:"work/banners/womens-makeup-full.webp", w:720, h:318 },
+  { title:"Men & women", title_ar:"رجالي وحريمي", cat:"Website banners", type:"image", image:"work/banners/men-women.webp", full:"work/banners/men-women-full.webp", w:720, h:318 },
+  { title:"Home appliances", title_ar:"الأجهزة المنزلية", cat:"Website banners", type:"image", image:"work/banners/home-appliances.webp", full:"work/banners/home-appliances-full.webp", w:720, h:404 },
+  { title:"Men's collection", title_ar:"رجالي", cat:"Website banners", type:"image", image:"work/banners/mens.webp", full:"work/banners/mens-full.webp", w:720, h:404 },
+  { title:"Kahraman fabrics", title_ar:"كهرمان أقمشة", cat:"Website banners", type:"image", image:"work/banners/kahraman-fabrics.webp", full:"work/banners/kahraman-fabrics-full.webp", w:720, h:404 },
+  { title:"Bedaya Hospital profile", title_ar:"بروفايل مستشفى بداية", cat:"Company profiles", type:"pdf", image:"work/profiles/bedaya-profile.webp", pages:11, w:720, h:514 },
+  { title:"IPC brand guidelines", title_ar:"دليل هوية IPC", cat:"Company profiles", type:"pdf", image:"work/profiles/ipc-guidelines.webp", pages:19, w:720, h:508 },
+  { title:"Sumou brochure", title_ar:"بروشور سمو", cat:"Company profiles", type:"pdf", image:"work/profiles/sumou-brochure.webp", pages:38, w:720, h:498 },
+  { title:"Social media collection", title_ar:"مجموعة أعمال سوشيال ميديا", cat:"Social media", type:"pdf", image:"work/social/social-media-collection.webp", pages:17, w:720, h:540 },
+  { title:"10,000 products, 800 brands", title_ar:"10000 منتج 800 براند", cat:"Social media", type:"image", image:"work/social/10000-products.webp", full:"work/social/10000-products-full.webp", w:720, h:720 },
+  { title:"Borg Dawa", title_ar:"برج الدواء", cat:"Social media", type:"image", image:"work/social/borg-dawa-3.webp", full:"work/social/borg-dawa-3-full.webp", w:720, h:718 },
+  { title:"Borg Dawa", title_ar:"برج الدواء", cat:"Social media", type:"image", image:"work/social/borg-dawa-4.webp", full:"work/social/borg-dawa-4-full.webp", w:720, h:718 },
+  { title:"Borg Dawa", title_ar:"برج الدواء", cat:"Social media", type:"image", image:"work/social/borg-dawa-8.webp", full:"work/social/borg-dawa-8-full.webp", w:720, h:718 },
+  { title:"Dalia Clinics", title_ar:"Dalia Clinics", cat:"Social media", type:"image", image:"work/social/dalia-clinics-15.webp", full:"work/social/dalia-clinics-15-full.webp", w:576, h:720 },
+  { title:"Dalia Clinics", title_ar:"Dalia Clinics", cat:"Social media", type:"image", image:"work/social/dalia-clinics-6.webp", full:"work/social/dalia-clinics-6-full.webp", w:582, h:720 },
+  { title:"Derma Point", title_ar:"Derma Point", cat:"Social media", type:"image", image:"work/social/derma-point.webp", full:"work/social/derma-point-full.webp", w:720, h:712 },
+  { title:"Dr Zanon", title_ar:"Dr Zanon", cat:"Social media", type:"image", image:"work/social/dr-zanon-2.webp", full:"work/social/dr-zanon-2-full.webp", w:712, h:720 },
+  { title:"Dr Zanon", title_ar:"Dr Zanon", cat:"Social media", type:"image", image:"work/social/dr-zanon-3.webp", full:"work/social/dr-zanon-3-full.webp", w:720, h:720 },
+  { title:"Dr Zanon", title_ar:"Dr Zanon", cat:"Social media", type:"image", image:"work/social/dr-zanon-4.webp", full:"work/social/dr-zanon-4-full.webp", w:720, h:716 },
+  { title:"Dr Zanon", title_ar:"Dr Zanon", cat:"Social media", type:"image", image:"work/social/dr-zanon-6.webp", full:"work/social/dr-zanon-6-full.webp", w:718, h:720 },
+  { title:"Naya Saudi", title_ar:"Naya Saudi", cat:"Social media", type:"image", image:"work/social/naya-saudi.webp", full:"work/social/naya-saudi-full.webp", w:720, h:720 },
+  { title:"Rehlaty app", title_ar:"تطبيق رحلتي", cat:"Social media", type:"image", image:"work/social/post-1.webp", full:"work/social/post-1-full.webp", w:720, h:720 },
+  { title:"Rehlaty app", title_ar:"تطبيق رحلتي", cat:"Social media", type:"image", image:"work/social/post-2.webp", full:"work/social/post-2-full.webp", w:720, h:720 },
+  { title:"Sumou", title_ar:"سمو", cat:"Social media", type:"image", image:"work/social/sumou.webp", full:"work/social/sumou-full.webp", w:720, h:720 },
+  { title:"Soul Clinics", title_ar:"سول كلينكس", cat:"Social media", type:"image", image:"work/social/soul-clinics-1.webp", full:"work/social/soul-clinics-1-full.webp", w:720, h:616 },
+  { title:"Soul Clinics", title_ar:"سول كلينكس", cat:"Social media", type:"image", image:"work/social/soul-clinics-14.webp", full:"work/social/soul-clinics-14-full.webp", w:720, h:614 },
+  { title:"Soul Clinics", title_ar:"سول كلينكس", cat:"Social media", type:"image", image:"work/social/soul-clinics-17.webp", full:"work/social/soul-clinics-17-full.webp", w:578, h:720 },
+  { title:"Soul Clinics", title_ar:"سول كلينكس", cat:"Social media", type:"image", image:"work/social/soul-clinics-22.webp", full:"work/social/soul-clinics-22-full.webp", w:720, h:610 },
+  { title:"Soul Clinics", title_ar:"سول كلينكس", cat:"Social media", type:"image", image:"work/social/soul-clinics.webp", full:"work/social/soul-clinics-full.webp", w:576, h:720 },
+  { title:"Tabby & Tamara", title_ar:"تابي وتمارا", cat:"Social media", type:"image", image:"work/social/tabby-tamara-2.webp", full:"work/social/tabby-tamara-2-full.webp", w:576, h:720 },
+  { title:"Tabby & Tamara", title_ar:"تابي وتمارا", cat:"Social media", type:"image", image:"work/social/tabby-tamara.webp", full:"work/social/tabby-tamara-full.webp", w:576, h:720 },
+  { title:"Dr. Ismail", title_ar:"دكتور إسماعيل", cat:"Social media", type:"image", image:"work/social/dr-ismail.webp", full:"work/social/dr-ismail-full.webp", w:720, h:720 },
+  { title:"Championship maker", title_ar:"صانع البطولات", cat:"Social media", type:"image", image:"work/social/champion-maker-3.webp", full:"work/social/champion-maker-3-full.webp", w:720, h:720 },
+  { title:"Championship maker", title_ar:"صانع البطولات", cat:"Social media", type:"image", image:"work/social/champion-maker-4.webp", full:"work/social/champion-maker-4-full.webp", w:720, h:720 },
+  { title:"Championship maker", title_ar:"صانع البطولات", cat:"Social media", type:"image", image:"work/social/champion-maker-5.webp", full:"work/social/champion-maker-5-full.webp", w:720, h:720 },
+  { title:"Perfume", title_ar:"عطر", cat:"Social media", type:"image", image:"work/social/perfume.webp", full:"work/social/perfume-full.webp", w:576, h:720 },
+  { title:"Perfume", title_ar:"عطر", cat:"Social media", type:"image", image:"work/social/perfume-2.webp", full:"work/social/perfume-2-full.webp", w:576, h:720 },
+  { title:"Mother's Day · Bedaya", title_ar:"عيد الأم · بداية", cat:"Social media", type:"image", image:"work/social/mothers-day-bedaya.webp", full:"work/social/mothers-day-bedaya-full.webp", w:720, h:720 },
+  { title:"Fast Booking Travel", title_ar:"فاست بوكينج ترافيل", cat:"Social media", type:"image", image:"work/social/fast-booking-travel.webp", full:"work/social/fast-booking-travel-full.webp", w:720, h:720 },
+  { title:"Mirage perfume notes", title_ar:"مكونات عطر ميراج", cat:"Social media", type:"image", image:"work/social/mirage-perfume.webp", full:"work/social/mirage-perfume-full.webp", w:720, h:720 },
+  { title:"Video edit 1", title_ar:"مونتاج 1", cat:"Video editing", type:"video", image:"work/video/edit-1.webp", video:"work/video/edit-1.mp4", loop:"work/video/edit-1-loop.mp4", w:720, h:720 },
+  { title:"Video edit 2", title_ar:"مونتاج 2", cat:"Video editing", type:"video", image:"work/video/edit-2.webp", video:"work/video/edit-2.mp4", loop:"work/video/edit-2-loop.mp4", w:404, h:720 },
+  { title:"Video edit 3", title_ar:"مونتاج 3", cat:"Video editing", type:"video", image:"work/video/edit-3.webp", video:"work/video/edit-3.mp4", loop:"work/video/edit-3-loop.mp4", w:404, h:720 },
+  { title:"“One step ahead” campaign", title_ar:"حملة سبقتك بخطوة", cat:"AI productions", type:"video", image:"work/ai/one-step-ahead.webp", video:"work/ai/one-step-ahead.mp4", loop:"work/ai/one-step-ahead-loop.mp4", w:720, h:720 },
+  { title:"AI videos on Behance", title_ar:"فيديوهات AI على Behance", cat:"AI productions", type:"video", image:"work/ai/ai-videos-behance.webp", video:"work/ai/ai-videos-behance.mp4", loop:"work/ai/ai-videos-behance-loop.mp4", w:422, h:720 },
+  { title:"Hajj Noaman", title_ar:"حج نعمان", cat:"AI productions", type:"video", image:"work/ai/hajj-noaman.webp", video:"work/ai/hajj-noaman.mp4", loop:"work/ai/hajj-noaman-loop.mp4", w:720, h:720 },
+  { title:"Bakz ad", title_ar:"إعلان باكز", cat:"AI productions", type:"video", image:"work/ai/bakz-ad.webp", video:"work/ai/bakz-ad.mp4", loop:"work/ai/bakz-ad-loop.mp4", w:720, h:520 },
+  { title:"Paris Corner New Year ad", title_ar:"إعلان ركن باريس رأس السنة", cat:"AI productions", type:"video", image:"work/ai/paris-corner-new-year.webp", video:"work/ai/paris-corner-new-year.mp4", loop:"work/ai/paris-corner-new-year-loop.mp4", w:720, h:720 },
+  { title:"Jouri video", title_ar:"فيديو جوري", cat:"AI productions", type:"video", image:"work/ai/jouri.webp", video:"work/ai/jouri.mp4", loop:"work/ai/jouri-loop.mp4", w:720, h:520 },
+  { title:"Mother's Day", title_ar:"عيد الأم", cat:"AI productions", type:"video", image:"work/ai/mothers-day.webp", video:"work/ai/mothers-day.mp4", loop:"work/ai/mothers-day-loop.mp4", w:720, h:720 },
+  { title:"E-learning concepts", title_ar:"أفكار تعليم إلكتروني", cat:"E-learning", type:"pdf", image:"work/elearning/elearning-concepts.webp", pages:13, w:720, h:406 }
 ];
 
-/* Arabic names for the project categories (keys must match `cat` above). */
-const CATS_AR = { "All":"الكل", "E-learning":"تعليم إلكتروني", "Branding":"هوية بصرية", "Social media":"سوشيال ميديا", "Animation":"رسوم متحركة" };
+/* Arabic names for the project tabs (keys must match `cat` above). */
+const CATS_AR = {
+  "Motion graphics":"موشن جرافيك", "Reels":"ريلز", "UI/UX":"واجهات UI/UX", "Website banners":"بنرات مواقع",
+  "Company profiles":"بروفايل شركات", "Social media":"سوشيال ميديا", "Video editing":"مونتاج فيديو",
+  "AI productions":"إنتاج بالذكاء الاصطناعي", "E-learning":"تعليم إلكتروني"
+};
 
 /* EXPERIENCE: newest first. Replace each `what` (and `what_ar`) with one line on what you did there. */
 const JOBS = [
@@ -81,7 +148,13 @@ const AR = {
 
   "work.title": "أعمال مختارة",
   "work.lede": "بعض المشاريع في التعليم الإلكتروني والهوية البصرية والتسويق. دراسات الحالة الكاملة على Behance.",
-  "work.filter": "تصفية المشاريع",
+  "work.tabs": "أقسام المشاريع",
+  "work.video": "فيديو",
+  "work.page": "صفحة",
+  "work.pages": "صفحة",
+  "work.prev": "المشروع السابق",
+  "work.next": "المشروع التالي",
+  "work.close": "إغلاق",
   "work.more": "شاهد كل المشاريع على Behance",
   "work.placeholder": "أضف صورة مصغرة أو فيديو",
 

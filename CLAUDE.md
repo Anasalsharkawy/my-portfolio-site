@@ -8,16 +8,19 @@ Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.htm
 - `css/style.css` — all styles. Color tokens are on `:root` at the top (light theme) and
   redefined for dark theme under `prefers-color-scheme: dark` and `:root[data-theme="dark"]`.
 - `js/content.js` — ALL editable data: `PROJECTS`, `CATS_AR`, `JOBS`, `TOOLS`, `LANGS`, and `AR` (Arabic page text).
-- `js/main.js` — renders content.js into the page (project grid + filters, timeline, skill bars),
+- `js/main.js` — renders content.js into the page (project tabs + masonry grid + viewer dialog, timeline, skill bars),
   and runs the language (English/Arabic) and light/dark toggles in the nav.
 - `assets/anas-desk.webp` — Anas's illustrated self-portrait (from his CV). Transparent background.
-- `work/` — put project thumbnails (.jpg/.webp) and short looping videos (.mp4) here.
+- `work/<category>/` — compressed project media (webp images, mp4 videos + `-loop.mp4` previews, PDF pages as `-pNN.webp`).
 
 ## Content rules
 - Content changes go in `js/content.js`, not in main.js or the HTML.
-- Project entries: `{ title, cat, wide?, video, image, link }`. Paths are relative, e.g. `"work/brand.mp4"`.
-  `video` autoplays muted and looped (not when the visitor prefers reduced motion); `image` becomes its poster.
-  Filter buttons are generated automatically from the `cat` values.
+- Project entries: `{ title, title_ar, cat, type, image, w, h, ... }` — see the comment above `PROJECTS` in content.js.
+  `type` is "video" (`video` full with sound + `loop` muted card preview), "image" (`full`) or "pdf" (`pages`).
+  Tabs are generated from `cat` in order of first appearance; translate new tab names in `CATS_AR`.
+  Clicking a card opens the viewer (dialog) with prev/next inside the current tab.
+- Media prep (keep the repo small, GitHub's file limit is 100 MB): full videos 720p H.264 crf 28 + AAC 96k + faststart;
+  loops 6 s, 640px, no audio; images webp (card ≤720px, full ≤1800px); PDFs rendered to webp pages ~1500px wide.
 - Never invent clients, numbers, testimonials, or achievements. Only use facts Anas provides.
   Placeholder text currently reads "Add one line on your role" — replace it only with real info.
 - Testimonials, client logos, and a blog were intentionally left out until real content exists.
@@ -54,7 +57,6 @@ Static hosting, no build: Netlify (drag the folder onto app.netlify.com/drop, or
 GitHub Pages, or Vercel. `netlify.toml` publishes the repo root.
 
 ## Good next tasks
-- Add real projects to `PROJECTS` and media to `work/` (compress videos: under ~3 MB, 720p, no audio).
 - Fill in `JOBS[].what` lines with Anas's real responsibilities.
 - Add Open Graph tags + a share image, and a favicon.
 - Optional: per-project case study pages (`work/<slug>.html`) reusing css/style.css.

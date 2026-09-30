@@ -106,25 +106,47 @@ section.block{padding:110px 0}
 @media (max-width:760px){.services{grid-template-columns:1fr}.svc,.svc:nth-child(even){padding:28px 0;border-inline-end:0}}
 
 /* Work */
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
-.filters button{font:inherit;font-weight:700;font-size:15px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
-.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
-.card{grid-column:span 2;text-decoration:none;display:flex;flex-direction:column;gap:12px}
-.card.wide{grid-column:span 4}
-.card[hidden]{display:none}
-.media{aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:var(--panel);border:1px solid var(--line);position:relative}
-.card.wide .media{aspect-ratio:auto;height:100%;min-height:300px}
-.media img,.media video{width:100%;height:100%;object-fit:cover}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.tabs button{font:inherit;font-weight:700;font-size:15px;padding:8px 10px 8px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.tabs .n{font-size:12px;min-width:24px;padding:1px 7px;border-radius:999px;background:var(--line);color:var(--ink);text-align:center}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs button[aria-selected="true"] .n{background:var(--yellow);color:var(--yellow-ink)}
+[dir="rtl"] .tabs button{padding:8px 16px 8px 10px}
+@media (max-width:760px){.tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding:2px 20px 6px;scroll-padding-inline:20px}.tabs::-webkit-scrollbar{display:none}}
+/* Masonry: cards keep each piece's real shape. Mostly-landscape tabs get fewer, wider columns. */
+.grid{columns:3 280px;column-gap:22px}
+.grid.landscape{columns:2 340px}
+.card{break-inside:avoid;display:flex;flex-direction:column;gap:10px;width:100%;margin:0 0 26px;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:start;cursor:pointer}
+.media{aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:var(--panel);border:1px solid var(--line);position:relative;width:100%}
+.media img,.media video{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;inset-block-end:12px;inset-inline-end:12px;display:inline-flex;align-items:center;gap:6px;background:var(--bubble);color:var(--bubble-ink);font-size:13px;font-weight:700;padding:5px 10px;border-radius:999px}
+.badge svg{width:14px;height:14px}
 .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted);font-size:14px;font-weight:600}
 .ph svg{width:84px;height:84px;margin:0 auto 10px;color:var(--yellow)}
 .card .meta{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
-.card h3{font-size:26px}
+.card h3{font-size:24px}
 .card .cat{font-size:14px;color:var(--muted);font-weight:600;white-space:nowrap}
-a.card:hover h3{text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:4px;text-underline-offset:4px}
-.more{margin-top:40px}
-@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.card,.card.wide{grid-column:span 1}.card.wide .media{aspect-ratio:4/3;min-height:0}}
-@media (max-width:560px){.grid{grid-template-columns:1fr}}
+.card:hover h3{text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:4px;text-underline-offset:4px}
+.more{margin-top:24px}
+
+/* Project viewer */
+.viewer{width:min(1200px,100% - 24px);max-width:none;height:min(92vh,100% - 24px);max-height:none;padding:0;border:0;border-radius:26px;background:var(--bg);color:var(--ink);overflow:hidden}
+.viewer[open]{display:flex;flex-direction:column}
+.viewer::backdrop{background:rgba(15,19,23,.82);backdrop-filter:blur(6px)}
+.viewer-bar{display:flex;align-items:center;gap:8px;padding:14px 16px 14px 24px;border-bottom:1px solid var(--line)}
+[dir="rtl"] .viewer-bar{padding:14px 24px 14px 16px}
+.viewer-head{flex:1;min-width:0;display:flex;align-items:baseline;gap:12px}
+.viewer-head h3{font-size:26px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer-count{color:var(--muted);font-size:14px;font-weight:600;white-space:nowrap}
+[dir="rtl"] .viewer [data-act="prev"] svg,[dir="rtl"] .viewer [data-act="next"] svg{transform:scaleX(-1)}
+.viewer-body{flex:1;overflow:auto;display:grid;place-items:center;padding:20px;overscroll-behavior:contain}
+.viewer-body video,.viewer-body > img{max-width:100%;max-height:100%;border-radius:14px;background:#000}
+.viewer-body > img{background:none}
+.viewer-body.tall{place-items:start center}
+.viewer-body.tall > img{max-height:none}
+.pages{display:grid;gap:16px;width:min(100%,1100px)}
+.pages img{width:100%;height:auto;border-radius:12px;background:var(--panel)}
+@media (max-width:560px){.viewer{border-radius:18px}.viewer-body{padding:10px}.viewer-head h3{font-size:21px}.viewer-count{display:none}}
 
 /* Experience */
 .timeline{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
@@ -217,9 +239,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   .nav ul a:hover{background-size:100% 3px}
 
   /* Small hover touches */
-  .facts li,.filters button{transition:background .25s,color .25s,border-color .25s,transform .3s cubic-bezier(.2,.9,.25,1.3)}
+  .facts li,.tabs button{transition:background .25s,color .25s,border-color .25s,transform .3s cubic-bezier(.2,.9,.25,1.3)}
   .facts li:hover{background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow);transform:rotate(-2deg)}
-  .filters button:hover{transform:translateY(-2px)}
+  .tabs button:hover{transform:translateY(-2px)}
   .tools span{transition:transform .3s cubic-bezier(.2,.9,.25,1.3)}
   .tools span:hover{transform:rotate(-4deg) scale(1.08)}
   .timeline li{transition:padding .35s cubic-bezier(.2,.8,.2,1)}
@@ -227,9 +249,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   .links a{transition:background .25s,color .25s,border-color .25s,transform .3s cubic-bezier(.2,.9,.25,1.3)}
   .links a:hover{transform:translateY(-4px)}
 
-  /* Project filter: cards pop back in */
+  /* Project tabs: cards pop in; the viewer pops open like a speech bubble */
   .card.pop{animation:cardIn .5s cubic-bezier(.2,.9,.25,1.2) both}
   @keyframes cardIn{from{opacity:0;transform:scale(.9)}}
+  .viewer[open]{animation:viewerIn .45s cubic-bezier(.2,.9,.25,1.15)}
+  .viewer[open]::backdrop{animation:fadeIn .3s ease}
+  @keyframes viewerIn{from{opacity:0;transform:scale(.9) translateY(20px)}}
+  @keyframes fadeIn{from{opacity:0}}
 
   /* Theme switch: the new theme grows in a circle from the button (see main.js) */
   .vt-circle::view-transition-old(root),.vt-circle::view-transition-new(root){animation:none;mix-blend-mode:normal}

@@ -5,7 +5,7 @@ One-page portfolio site. No build step.
 **Preview:** open `index.html` in a browser, or run `npx serve .` (or `python3 -m http.server`) in this folder.
 
 **Edit content:** everything you'll normally change is in `js/content.js` (projects, jobs, skills).
-Put project images/videos in `work/` and reference them like `"work/my-project.mp4"`.
+Put project media in `work/<category>/` (compressed; see CLAUDE.md) and add an entry to `PROJECTS`.
 Arabic text is in the `AR` block at the bottom of `js/content.js` (plus `title_ar` / `what_ar` fields).
 
 **With Claude Code:** run `claude` in this folder. It reads `CLAUDE.md` for the project rules.

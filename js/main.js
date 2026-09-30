@@ -244,6 +244,20 @@ if (fancy && matchMedia("(hover: hover)").matches) {
   });
 }
 
+/* Hero portrait parallax: the label layers follow the pointer at different depths */
+const portrait = document.querySelector(".portrait");
+if (fancy && portrait && matchMedia("(hover: hover)").matches) {
+  const hero = document.querySelector(".hero");
+  hero.addEventListener("pointermove", e => {
+    const r = portrait.getBoundingClientRect();
+    const mx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width / 1.2)));
+    const my = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height / 1.2)));
+    portrait.style.setProperty("--mx", mx.toFixed(3));
+    portrait.style.setProperty("--my", my.toFixed(3));
+  });
+  hero.addEventListener("pointerleave", () => { portrait.style.removeProperty("--mx"); portrait.style.removeProperty("--my"); });
+}
+
 /* Pen cursor with a trailing ring (mouse/trackpad only) */
 if (fancy && matchMedia("(pointer: fine)").matches) {
   root.classList.add("has-cursor");

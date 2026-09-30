@@ -19,6 +19,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Cairo:wght@400..1000&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 <body>
 
@@ -59,7 +62,14 @@
           <strong>Hi, I'm Anas Al-Sharkawy.</strong>
           Graphic designer and 2D animator. Tell me the idea and I'll give it a look, a voice and some movement.
         </div>
-        <img src="assets/anas-desk.webp" width="582" height="474" alt="Illustrated self-portrait of Anas drawing on a pen display at his desk" data-i18n-alt="hero.alt">
+        <figure class="portrait">
+          <span class="plate plate-back" aria-hidden="true"></span>
+          <span class="plate plate-front" aria-hidden="true"></span>
+          <svg class="deco deco-tri" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 5l16 28H4z"/></svg>
+          <svg class="deco deco-ring" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13"/></svg>
+          <svg class="deco deco-x" viewBox="0 0 40 40" aria-hidden="true"><path d="M10 10l20 20M30 10L10 30"/></svg>
+          <img src="assets/anas-portrait.webp" width="1121" height="1403" alt="Low-poly illustrated portrait of Anas looking up" data-i18n-alt="hero.alt" fetchpriority="high">
+        </figure>
       </div>
     </div>
   </section>

@@ -10,7 +10,8 @@ Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.htm
 - `js/content.js` — ALL editable data: `PROJECTS`, `CATS_AR`, `JOBS`, `TOOLS`, `LANGS`, and `AR` (Arabic page text).
 - `js/main.js` — renders content.js into the page (project tabs + masonry grid + viewer dialog, timeline, skill bars),
   and runs the language (English/Arabic) and light/dark toggles in the nav.
-- `assets/anas-desk.webp` — Anas's illustrated self-portrait (from his CV). Transparent background.
+- `assets/anas-portrait.webp` — Anas's low-poly portrait, background removed (hero "label" with tilted plates).
+- `assets/favicon-32.png`, `icon-192.png`, `apple-touch-icon.png` — site icons cropped from the same portrait (red background).
 - `work/<category>/` — compressed project media (webp images, mp4 videos + `-loop.mp4` previews, PDF pages as `-pNN.webp`).
 
 ## Content rules
@@ -39,7 +40,7 @@ Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.htm
 - Font: Archivo (Google Fonts), condensed width (`"wdth" 62`) + heavy weight for headings, normal width for body.
 - The speech bubble is the recurring motif (logo, hero, contact). Keep it.
 - Motion (all in the "Motion" sections of style.css and main.js, all off under `prefers-reduced-motion`):
-  hero rise + marker-drawn highlight + bubble pop + floating portrait, scroll reveals (`.rv`, `.rv-pop` speech-bubble pop,
+  hero rise + marker-drawn highlight + bubble pop + portrait label (plates pop in and rock, portrait floats, pointer parallax), scroll reveals (`.rv`, `.rv-pop` speech-bubble pop,
   `.rv-side`, `.rv-bars` skill bars), card tilt on hover, pen cursor with trailing ring (mouse only),
   scroll progress line, and View Transitions for theme (circle from the button) and language (crossfade).
   New sections: reuse the `reveal()` helper in main.js instead of writing new animation code.
@@ -58,5 +59,5 @@ GitHub Pages, or Vercel. `netlify.toml` publishes the repo root.
 
 ## Good next tasks
 - Fill in `JOBS[].what` lines with Anas's real responsibilities.
-- Add Open Graph tags + a share image, and a favicon.
+- Add Open Graph tags + a share image.
 - Optional: per-project case study pages (`work/<slug>.html`) reusing css/style.css.

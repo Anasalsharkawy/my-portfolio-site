@@ -71,7 +71,18 @@ p{margin:0}
 .bubble strong{display:block;font-size:30px;line-height:1.05;font-weight:850;font-variation-settings:"wdth" 62;margin-bottom:6px}
 .bubble::after{content:"";position:absolute;inset-inline-start:24%;bottom:-24px;border:24px solid transparent;border-top-color:var(--bubble);border-inline-start-width:0}
 [dir="rtl"] .bubble{transform-origin:82% 110%}
-.stage img{width:100%;height:auto;margin-top:34px}
+/* Portrait "label": two tilted plates, the cut-out portrait pops out above them */
+.portrait{position:relative;width:min(86%,460px);margin:40px auto -44px;isolation:isolate}
+.portrait img{position:relative;z-index:3;width:100%;height:auto;filter:drop-shadow(0 22px 28px rgba(0,0,0,.28))}
+.plate{position:absolute;inset:24% -7% -6% -7%;border-radius:34px}
+.plate-back{background:var(--bubble);rotate:5deg;z-index:0}
+.plate-front{background:var(--yellow);rotate:-4deg;z-index:1}
+.deco{position:absolute;z-index:2;width:34px;height:34px;fill:none;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+.deco-tri{top:18%;inset-inline-start:-6%;fill:var(--yellow);stroke:none}
+.deco-ring{top:6%;inset-inline-end:2%;stroke:var(--yellow);width:40px;height:40px}
+.deco-x{top:52%;inset-inline-end:-9%;stroke:var(--muted);width:28px;height:28px}
+[dir="rtl"] .plate-back{rotate:-5deg}
+[dir="rtl"] .plate-front{rotate:4deg}
 @media (prefers-reduced-motion:no-preference){
   .bubble{animation:pop .9s cubic-bezier(.2,.9,.25,1.2) .35s both}
   @keyframes pop{0%{transform:scale(0,.2);opacity:0}45%{transform:scale(1.08,.9);opacity:1}70%{transform:scale(.97,1.04)}100%{transform:scale(1,1)}}
@@ -204,7 +215,24 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   .hero .lede{animation-delay:.15s}
   .hero .actions{animation-delay:.3s}
   .hero .hl{animation:draw .8s cubic-bezier(.7,0,.2,1) .75s both}
-  .stage img{animation:rise 1s cubic-bezier(.2,.8,.2,1) .1s both,float 6s ease-in-out 1.4s infinite}
+  .portrait img{animation:rise 1s cubic-bezier(.2,.8,.2,1) .45s both,float 6s ease-in-out 1.6s infinite}
+  .plate-back{animation:plateIn .9s cubic-bezier(.2,.9,.25,1.25) .1s both,rock 8s ease-in-out 1.2s infinite alternate}
+  .plate-front{animation:plateIn2 1s cubic-bezier(.2,.9,.25,1.3) .25s both,rock 7s ease-in-out 1.4s infinite alternate-reverse}
+  .deco{animation:decoIn .6s cubic-bezier(.2,.9,.25,1.4) both,drift 7s ease-in-out infinite}
+  .deco-tri{animation-delay:.9s,1.5s}
+  .deco-ring{animation-delay:1s,1.6s;animation-duration:.6s,9s}
+  .deco-x{animation-delay:1.1s,1.7s;animation-duration:.6s,6s}
+  @keyframes plateIn{from{opacity:0;transform:scale(.55) rotate(-12deg)}}
+  @keyframes plateIn2{from{opacity:0;transform:scale(.5) rotate(16deg)}}
+  @keyframes rock{to{transform:rotate(1.5deg) translateY(-5px)}}
+  @keyframes decoIn{from{opacity:0;transform:scale(0) rotate(-90deg)}}
+  @keyframes drift{50%{transform:translateY(-12px) rotate(24deg)}}
+  /* Pointer parallax: layers move at different depths (values set by main.js) */
+  .portrait > *{transition:translate .7s cubic-bezier(.2,.8,.2,1)}
+  .plate-back{translate:calc(var(--mx,0) * -16px) calc(var(--my,0) * -10px)}
+  .plate-front{translate:calc(var(--mx,0) * -8px) calc(var(--my,0) * -5px)}
+  .portrait img{translate:calc(var(--mx,0) * 10px) calc(var(--my,0) * 7px)}
+  .deco{translate:calc(var(--mx,0) * 26px) calc(var(--my,0) * 18px)}
   @keyframes rise{from{opacity:0;transform:translateY(28px)}}
   @keyframes draw{from{background-size:0% 34%}}
   @keyframes float{50%{transform:translateY(-8px) rotate(-.4deg)}}

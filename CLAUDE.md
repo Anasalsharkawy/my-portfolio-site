@@ -45,6 +45,8 @@ Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.htm
   `.rv-side`, `.rv-bars` skill bars), card tilt on hover, pen cursor with trailing ring (mouse only),
   scroll progress line, and View Transitions for theme (circle from the button) and language (crossfade).
   New sections: reuse the `reveal()` helper in main.js instead of writing new animation code.
+  Revealed elements lose their `.rv*` classes after ~2.4 s, so hover transitions on them work; the reveal transition
+  uses `.rv.rv` so element hover rules (e.g. `.timeline li { transition: … }`) can't cancel it.
 - Avoid ALL-CAPS labels, numbered section eyebrows, and generic card grids.
 - Keep it responsive down to ~360px, keep visible keyboard focus, respect `prefers-reduced-motion`.
 

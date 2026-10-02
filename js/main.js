@@ -183,7 +183,12 @@ function renderSkills(){
 const fancy = !reduce;
 const io = fancy && "IntersectionObserver" in window
   ? new IntersectionObserver(entries => entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      el.classList.add("in");
+      io.unobserve(el);
+      /* Once revealed, drop the .rv classes so the element's own hover transitions work normally. */
+      setTimeout(() => el.classList.remove("rv", "rv-pop", "rv-side", "rv-bars"), (parseFloat(el.style.getPropertyValue("--d")) || 0) * 1000 + 2400);
     }), { rootMargin: "0px 0px -8% 0px", threshold: .12 })
   : null;
 let firstRender = true;
@@ -191,18 +196,18 @@ let firstRender = true;
 /* Hide elements until they scroll into view, staggered by `step` seconds.
    After the first render (e.g. a language switch) new elements just appear. */
 function reveal(els, cls = "", step = .08){
-  if (!io) return;
+  if (!io || !firstRender) return;
   [...els].forEach((el, i) => {
-    if (el.classList.contains("rv")) return;
+    if (el.classList.contains("rv") || el.classList.contains("in")) return;
     el.classList.add("rv", ...cls.split(" ").filter(Boolean));
-    if (firstRender) { el.style.setProperty("--d", Math.min(i, 6) * step + "s"); io.observe(el); }
-    else el.classList.add("in");
+    el.style.setProperty("--d", Math.min(i, 8) * step + "s");
+    io.observe(el);
   });
 }
 
 function revealRendered(){
   reveal(grid.querySelectorAll(".card"));
-  reveal(document.querySelectorAll(".timeline li"), "rv-side", .06);
+  reveal(document.querySelectorAll(".timeline li"), "rv-side", .09);
   document.querySelectorAll(".bars").forEach(ul =>
     ul.querySelectorAll(".fill").forEach((f, i) => f.style.transitionDelay = .2 + i * .1 + "s"));
 }

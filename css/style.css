@@ -238,8 +238,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   @keyframes float{50%{transform:translateY(-8px) rotate(-.4deg)}}
 
   /* Scroll reveals */
-  .rv{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.8,.2,1) var(--d,0s),transform .8s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
-  .rv-pop{transform:scale(.85) translateY(16px);transform-origin:left bottom;transition-timing-function:ease,cubic-bezier(.2,.9,.25,1.3)}
+  /* .rv.rv: doubled class so element-specific hover transitions (e.g. ".timeline li") can't override the reveal.
+     main.js removes the .rv classes once the reveal has finished, so those hover transitions apply again. */
+  .rv{opacity:0;transform:translateY(34px)}
+  .rv.rv{transition:opacity .8s cubic-bezier(.2,.8,.2,1) var(--d,0s),transform .8s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
+  .rv-pop{transform:scale(.85) translateY(16px);transform-origin:left bottom}
+  .rv.rv-pop{transition-timing-function:ease,cubic-bezier(.2,.9,.25,1.3)}
   [dir="rtl"] .rv-pop{transform-origin:right bottom}
   .cta.rv-pop{transform-origin:12% 110%}
   [dir="rtl"] .cta.rv-pop{transform-origin:88% 110%}
@@ -249,6 +253,17 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   .rv-bars .fill{transform:scaleX(0);transform-origin:left;transition:transform 1.3s cubic-bezier(.2,.8,.2,1)}
   [dir="rtl"] .rv-bars .fill{transform-origin:right}
   .rv-bars.in .fill{transform:none}
+
+  /* Timeline rows: slide in, then the years and job type pop, and a yellow line draws underneath */
+  .timeline li{position:relative}
+  .timeline li.rv :is(.yrs,.type){opacity:0;transform:scale(.6);transition:opacity .5s ease calc(var(--d,0s) + .25s),transform .6s cubic-bezier(.2,.9,.25,1.4) calc(var(--d,0s) + .25s)}
+  .timeline li.rv .type{transition-delay:calc(var(--d,0s) + .4s)}
+  .timeline li.rv.in :is(.yrs,.type){opacity:1;transform:none}
+  .timeline li.rv-side .yrs{transform-origin:left center}
+  [dir="rtl"] .timeline li.rv-side .yrs{transform-origin:right center}
+  .timeline li.in::after{content:"";position:absolute;inset-inline:0;bottom:-1px;height:2px;background:var(--yellow);transform-origin:left;animation:lineDraw 1.4s cubic-bezier(.6,0,.2,1) var(--d,0s) both}
+  [dir="rtl"] .timeline li.in::after{transform-origin:right}
+  @keyframes lineDraw{0%{transform:scaleX(0);opacity:1}55%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
 
   /* Buttons lift, and the yellow ones get a light sweep */
   .btn{position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.2,.9,.25,1.3),filter .2s}

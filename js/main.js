@@ -164,7 +164,7 @@ function renderTimeline(){
   document.getElementById("timeline").innerHTML = JOBS.map(j => `
     <li>
       <span class="yrs">${esc(j.from)} – ${j.to==="Now"?`<span class="now">${esc(t("exp.now"))}</span>`:esc(j.to)}</span>
-      <div><h3>${esc(ar(j.name, j.name_ar))}</h3><p class="what">${esc(ar(j.what, j.what_ar))}</p></div>
+      <div><h3>${esc(ar(j.name, j.name_ar))}</h3>${j.what ? `<p class="what">${esc(ar(j.what, j.what_ar))}</p>` : ""}</div>
       ${j.type?`<span class="type">${esc(ar(j.type, AR["exp."+j.type]))}</span>`:"<span></span>"}
     </li>`).join("");
 }
@@ -188,7 +188,7 @@ const io = fancy && "IntersectionObserver" in window
       el.classList.add("in");
       io.unobserve(el);
       /* Once revealed, drop the .rv classes so the element's own hover transitions work normally. */
-      setTimeout(() => el.classList.remove("rv", "rv-pop", "rv-side", "rv-bars"), (parseFloat(el.style.getPropertyValue("--d")) || 0) * 1000 + 2400);
+      setTimeout(() => el.classList.remove("rv", "rv-pop", "rv-side", "rv-bar"), (parseFloat(el.style.getPropertyValue("--d")) || 0) * 1000 + 2400);
     }), { rootMargin: "0px 0px -8% 0px", threshold: .12 })
   : null;
 let firstRender = true;
@@ -208,8 +208,7 @@ function reveal(els, cls = "", step = .08){
 function revealRendered(){
   reveal(grid.querySelectorAll(".card"));
   reveal(document.querySelectorAll(".timeline li"), "rv-side", .09);
-  document.querySelectorAll(".bars").forEach(ul =>
-    ul.querySelectorAll(".fill").forEach((f, i) => f.style.transitionDelay = .2 + i * .1 + "s"));
+  document.querySelectorAll(".bars").forEach(ul => reveal(ul.children, "rv-side rv-bar", .09));
 }
 
 if (io) {
@@ -217,7 +216,6 @@ if (io) {
   reveal(document.querySelectorAll(".head .lede, .about .big, .tabs, .more"));
   reveal(document.querySelectorAll(".facts li"), "", .06);
   reveal(document.querySelectorAll(".svc"), "", .1);
-  reveal(document.querySelectorAll(".bars"), "rv-bars");
   reveal(document.querySelectorAll(".cta"), "rv-pop");
   reveal(document.querySelectorAll(".links a"), "", .1);
 }

@@ -24,7 +24,7 @@ Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.htm
 - Media prep (keep the repo small, GitHub's file limit is 100 MB): full videos 720p H.264 crf 28 + AAC 96k + faststart;
   loops 6 s, 640px, no audio; images webp (card ≤720px, full ≤1800px); PDFs rendered to webp pages ~1500px wide.
 - Never invent clients, numbers, testimonials, or achievements. Only use facts Anas provides.
-  Placeholder text currently reads "Add one line on your role" — replace it only with real info.
+  `JOBS[].what` lines are based on the portfolio pieces made for each company; jobs with no confirmed info have `what:""`.
 - Testimonials, client logos, and a blog were intentionally left out until real content exists.
 
 ## Languages (English + Arabic)
@@ -42,7 +42,7 @@ Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.htm
 - The speech bubble is the recurring motif (logo, hero, contact). Keep it.
 - Motion (all in the "Motion" sections of style.css and main.js, all off under `prefers-reduced-motion`):
   hero rise + marker-drawn highlight + bubble pop + portrait label (plates pop in and rock, portrait floats, pointer parallax), scroll reveals (`.rv`, `.rv-pop` speech-bubble pop,
-  `.rv-side`, `.rv-bars` skill bars), card tilt on hover, pen cursor with trailing ring (mouse only),
+  `.rv-side` timeline rows, `.rv-side.rv-bar` skill rows that fill), card tilt on hover, pen cursor with trailing ring (mouse only),
   scroll progress line, and View Transitions for theme (circle from the button) and language (crossfade).
   New sections: reuse the `reveal()` helper in main.js instead of writing new animation code.
   Revealed elements lose their `.rv*` classes after ~2.4 s, so hover transitions on them work; the reveal transition
@@ -61,5 +61,5 @@ Static hosting, no build: Netlify (drag the folder onto app.netlify.com/drop, or
 GitHub Pages, or Vercel. `netlify.toml` publishes the repo root.
 
 ## Good next tasks
-- Fill in `JOBS[].what` lines with Anas's real responsibilities.
+- Fill in the empty `JOBS[].what` lines (Delawy, Egyptian Saudi Academy, Skillsbank, Dosor, Nahdet Misr, Infort) once Anas describes them.
 - Optional: per-project case study pages (`work/<slug>.html`) reusing css/style.css.

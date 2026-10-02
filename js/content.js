@@ -86,17 +86,24 @@ const CATS_AR = {
   "AI productions":"إنتاج بالذكاء الاصطناعي", "E-learning":"تعليم إلكتروني"
 };
 
-/* EXPERIENCE: newest first. Replace each `what` (and `what_ar`) with one line on what you did there. */
+/* EXPERIENCE: newest first, as on the CV. `what` describes the work, based on the portfolio pieces made for
+   each company (see the Selected work tabs). Leave `what` empty ("") when there's nothing confirmed to say. */
 const JOBS = [
-  { from:"2025", to:"Now", name:"Paris Corner", type:"Full-time", what:"Saudi marketing agency. Add one line on your role.", what_ar:"وكالة تسويق سعودية. أضف سطرًا عن دورك." },
-  { from:"2024", to:"Now", name:"Sumou", type:"Full-time", what:"Saudi marketing agency. Add one line on your role.", what_ar:"وكالة تسويق سعودية. أضف سطرًا عن دورك." },
-  { from:"2023", to:"Now", name:"Bedaya Hospital", type:"Part-time", what:"Add one line on your role.", what_ar:"أضف سطرًا عن دورك." },
-  { from:"2023", to:"2024", name:"Delawy", type:"Full-time", what:"Saudi app. Add one line on your role.", what_ar:"تطبيق سعودي. أضف سطرًا عن دورك." },
-  { from:"2023", to:"2024", name:"Egyptian Saudi Academy", type:"Part-time", what:"Add one line on your role.", what_ar:"أضف سطرًا عن دورك." },
-  { from:"2021", to:"2023", name:"Skillsbank", type:"Part-time", what:"Online courses. Add one line on your role.", what_ar:"كورسات أونلاين. أضف سطرًا عن دورك." },
-  { from:"2020", to:"2021", name:"Dosor", type:"", what:"Add one line on your role.", what_ar:"أضف سطرًا عن دورك." },
-  { from:"2019", to:"Now", name:"Nahdet Misr Publishing House", type:"", what:"Educational publisher. Add one line on your role.", what_ar:"دار نشر تعليمية. أضف سطرًا عن دورك." },
-  { from:"2018", to:"2019", name:"Infort", type:"", what:"Add one line on your role.", what_ar:"أضف سطرًا عن دورك." }
+  { from:"2025", to:"Now", name:"Paris Corner", type:"Full-time",
+    what:"Website banners, social media posts and AI-produced video ads for this Saudi online store: perfume, fashion and home appliance campaigns, plus seasonal ones like New Year.",
+    what_ar:"بنرات الموقع ومنشورات السوشيال ميديا وإعلانات فيديو بالذكاء الاصطناعي لهذا المتجر السعودي الإلكتروني: حملات العطور والأزياء والأجهزة المنزلية، وحملات المواسم مثل رأس السنة." },
+  { from:"2024", to:"Now", name:"Sumou", type:"Full-time",
+    what:"Saudi marketing agency. Designed the Sumou landing page, the company brochure and social media posts.",
+    what_ar:"وكالة تسويق سعودية. صممت صفحة الهبوط والبروشور التعريفي ومنشورات السوشيال ميديا لسمو." },
+  { from:"2023", to:"Now", name:"Bedaya Hospital", type:"Part-time",
+    what:"The hospital's company profile, motion graphics and reels for its health campaigns, social media posts, and AI-produced awareness videos.",
+    what_ar:"البروفايل التعريفي للمستشفى، وموشن جرافيك وريلز لحملاتها الصحية، ومنشورات السوشيال ميديا، وفيديوهات توعوية بالذكاء الاصطناعي." },
+  { from:"2023", to:"2024", name:"Delawy", type:"Full-time", what:"Saudi app.", what_ar:"تطبيق سعودي." },
+  { from:"2023", to:"2024", name:"Egyptian Saudi Academy", type:"Part-time", what:"", what_ar:"" },
+  { from:"2021", to:"2023", name:"Skillsbank", type:"Part-time", what:"Online courses.", what_ar:"كورسات أونلاين." },
+  { from:"2020", to:"2021", name:"Dosor", type:"", what:"", what_ar:"" },
+  { from:"2019", to:"Now", name:"Nahdet Misr Publishing House", type:"", what:"Educational publisher.", what_ar:"دار نشر تعليمية." },
+  { from:"2018", to:"2019", name:"Infort", type:"", what:"", what_ar:"" }
 ];
 
 /* SKILLS: values are the bar lengths from the CV (0–100). LANGS: [name, value, Arabic name]. */

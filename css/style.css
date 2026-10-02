@@ -163,7 +163,7 @@ section.block{padding:110px 0}
 .timeline{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
 .timeline li{display:grid;grid-template-columns:170px 1fr auto;gap:8px 30px;padding:24px 0;border-bottom:1px solid var(--line);align-items:baseline}
 .timeline .yrs{font-weight:800;font-variation-settings:"wdth" 62;font-size:24px;white-space:nowrap}
-:lang(ar) .timeline li{grid-template-columns:200px 1fr auto}
+@media (min-width:641px){:lang(ar) .timeline li{grid-template-columns:200px 1fr auto}}
 :lang(ar) .timeline .yrs{font-size:21px}
 .timeline .now{background:var(--yellow);color:var(--yellow-ink);padding:0 6px;border-radius:4px}
 .timeline h3{font-size:32px}

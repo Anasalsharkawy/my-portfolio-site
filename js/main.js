@@ -188,7 +188,7 @@ const io = fancy && "IntersectionObserver" in window
       el.classList.add("in");
       io.unobserve(el);
       /* Once revealed, drop the .rv classes so the element's own hover transitions work normally. */
-      setTimeout(() => el.classList.remove("rv", "rv-pop", "rv-side", "rv-bar"), (parseFloat(el.style.getPropertyValue("--d")) || 0) * 1000 + 2400);
+      setTimeout(() => el.classList.remove("rv", "rv-pop", "rv-side", "rv-bar", "rv-svc"), (parseFloat(el.style.getPropertyValue("--d")) || 0) * 1000 + 2400);
     }), { rootMargin: "0px 0px -8% 0px", threshold: .12 })
   : null;
 let firstRender = true;
@@ -215,7 +215,7 @@ if (io) {
   reveal(document.querySelectorAll("section.block h2, .skills-wrap h3"), "rv-pop");
   reveal(document.querySelectorAll(".head .lede, .about .big, .tabs, .more"));
   reveal(document.querySelectorAll(".facts li"), "", .06);
-  reveal(document.querySelectorAll(".svc"), "", .1);
+  reveal(document.querySelectorAll(".svc"), "rv-side rv-svc", .14);
   reveal(document.querySelectorAll(".cta"), "rv-pop");
   reveal(document.querySelectorAll(".links a"), "", .1);
 }

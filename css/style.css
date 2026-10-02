@@ -19,7 +19,7 @@
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.6;font-variation-settings:"wdth" 100;-webkit-font-smoothing:antialiased}
+body{margin:0;overflow-x:clip;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.6;font-variation-settings:"wdth" 100;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:4px}
@@ -162,7 +162,9 @@ section.block{padding:110px 0}
 /* Experience */
 .timeline{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
 .timeline li{display:grid;grid-template-columns:170px 1fr auto;gap:8px 30px;padding:24px 0;border-bottom:1px solid var(--line);align-items:baseline}
-.timeline .yrs{font-weight:800;font-variation-settings:"wdth" 62;font-size:24px}
+.timeline .yrs{font-weight:800;font-variation-settings:"wdth" 62;font-size:24px;white-space:nowrap}
+:lang(ar) .timeline li{grid-template-columns:200px 1fr auto}
+:lang(ar) .timeline .yrs{font-size:21px}
 .timeline .now{background:var(--yellow);color:var(--yellow-ink);padding:0 6px;border-radius:4px}
 .timeline h3{font-size:32px}
 .timeline .what{color:var(--muted);margin-top:4px}
@@ -249,7 +251,23 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   [dir="rtl"] .cta.rv-pop{transform-origin:88% 110%}
   .rv-side{transform:translateX(-44px)}
   [dir="rtl"] .rv-side{transform:translateX(44px)}
-  .rv.in,[dir] .rv.in{opacity:1;transform:none}
+  .rv.in,[dir] .rv.rv.in{opacity:1;transform:none}
+  /* Services: blocks slide in from their own side, then heading, text and tool tags pop in turn,
+     and a yellow line draws along the bottom border (same lineDraw as the timeline) */
+  .svc{position:relative}
+  .rv-svc:nth-child(even){transform:translateX(44px)}
+  [dir="rtl"] .rv-svc:nth-child(even){transform:translateX(-44px)}
+  .rv-svc :is(h3,p){opacity:0;transform:translateY(14px);transition:opacity .6s ease calc(var(--d,0s) + var(--k)),transform .7s cubic-bezier(.2,.9,.25,1.2) calc(var(--d,0s) + var(--k))}
+  .rv-svc h3{--k:.2s}
+  .rv-svc p{--k:.32s}
+  .rv-svc .tools span{opacity:0;transform:scale(.4) rotate(-8deg);transition:opacity .4s ease calc(var(--d,0s) + var(--k)),transform .55s cubic-bezier(.2,.9,.25,1.5) calc(var(--d,0s) + var(--k))}
+  .rv-svc .tools span:nth-child(1){--k:.48s}
+  .rv-svc .tools span:nth-child(2){--k:.58s}
+  .rv-svc .tools span:nth-child(3){--k:.68s}
+  .rv-svc.in :is(h3,p,.tools span){opacity:1;transform:none}
+  .svc.in::after{content:"";position:absolute;inset-inline:0;bottom:-1px;height:2px;background:var(--yellow);transform-origin:left;animation:lineDraw 1.4s cubic-bezier(.6,0,.2,1) calc(var(--d,0s) + .15s) both}
+  [dir="rtl"] .svc.in::after{transform-origin:right}
+
   /* Skill bars: each row slides in like the timeline, then its bar fills with a marker tip */
   .rv-bar .fill{position:relative;transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(.6,0,.2,1) calc(var(--d,0s) + .25s)}
   [dir="rtl"] .rv-bar .fill{transform-origin:right}

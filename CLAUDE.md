@@ -42,7 +42,7 @@ Plain HTML/CSS/JS. No framework, no build step, no dependencies. Open `index.htm
 - The speech bubble is the recurring motif (logo, hero, contact). Keep it.
 - Motion (all in the "Motion" sections of style.css and main.js, all off under `prefers-reduced-motion`):
   hero rise + marker-drawn highlight + bubble pop + portrait label (plates pop in and rock, portrait floats, pointer parallax), scroll reveals (`.rv`, `.rv-pop` speech-bubble pop,
-  `.rv-side` timeline rows, `.rv-side.rv-bar` skill rows that fill), card tilt on hover, pen cursor with trailing ring (mouse only),
+  `.rv-side` timeline rows, `.rv-side.rv-svc` service blocks, `.rv-side.rv-bar` skill rows that fill), card tilt on hover, pen cursor with trailing ring (mouse only),
   scroll progress line, and View Transitions for theme (circle from the button) and language (crossfade).
   New sections: reuse the `reveal()` helper in main.js instead of writing new animation code.
   Revealed elements lose their `.rv*` classes after ~2.4 s, so hover transitions on them work; the reveal transition

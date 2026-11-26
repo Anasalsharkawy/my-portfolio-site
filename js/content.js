@@ -13,7 +13,6 @@
    Media lives in work/<category>/. Compress before adding (see CLAUDE.md).
    ===================================================================== */
 const PROJECTS = [
-  { title:"2D animation", title_ar:"رسوم متحركة 2D", cat:"Motion graphics", type:"video", image:"work/motion/2d-animation.webp", video:"work/motion/2d-animation.mp4", loop:"work/motion/2d-animation-loop.mp4", w:720, h:404 },
   { title:"Solar energy", title_ar:"الطاقة الشمسية", cat:"Motion graphics", type:"video", image:"work/motion/solar-energy.webp", video:"work/motion/solar-energy.mp4", loop:"work/motion/solar-energy-loop.mp4", w:720, h:404 },
   { title:"Mohsen & Hanan series intro", title_ar:"انترو حلقات محسن وحنان", cat:"Motion graphics", type:"video", image:"work/motion/mohsen-hanan-intro.webp", video:"work/motion/mohsen-hanan-intro.mp4", loop:"work/motion/mohsen-hanan-intro-loop.mp4", w:720, h:404 },
   { title:"Ismail's success story", title_ar:"قصة نجاح إسماعيل", cat:"Motion graphics", type:"video", image:"work/motion/ismail-success-story.webp", video:"work/motion/ismail-success-story.mp4", loop:"work/motion/ismail-success-story-loop.mp4", w:720, h:404 },
